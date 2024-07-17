@@ -1,0 +1,34 @@
+/* eslint-env node */
+{
+  "root": true,
+  "env": {
+    "browser": true,
+    "node": true,
+    "es2020": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react-hooks/recommended",
+    "prettier",
+    "plugin:react-hooks/recommended",
+    "plugin:jsx-a11y/recommended"
+  ],
+  "overrides": [
+    {
+      "files": [".prettierrc.js", ".eslintrc.cjs"],
+      "env": {
+        "node": true
+      }
+    }
+  ],
+  "ignorePatterns": ["dist", ".eslintrc.cjs", ".prettierrc.js"],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["react-refresh"],
+  "rules": {
+    "react-refresh/only-export-components": [
+      "warn",
+      { "allowConstantExport": true }
+    ]
+  }
+}
