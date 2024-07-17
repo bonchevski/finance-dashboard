@@ -1,11 +1,13 @@
 /* eslint-disable react/react-in-jsx-scope */
-import { Outlet, BrowserRouter, useRoutes } from 'react-router-dom';
+import { BrowserRouter, useRoutes } from 'react-router-dom';
 import { useEffect } from 'react';
 import AxiosInterceptor from './axiosHelpers/AxiosInterceptor';
 import AxiosInstance from './axiosHelpers/AxiosInstance';
 import RequireAuth from './router/RequireAuth';
 import { refreshToken } from './utils/refreshToken';
 import Login from './pages/Login/Login';
+import RootLayout from './rootLayout/RootLayout';
+import Dashboard from './pages/Dashboard/Dashboard';
 
 // export const API_URL = `${process.env.REACT_APP_API_URL}`;
 
@@ -13,15 +15,21 @@ export const commonRoutes = [
   {
     path: '/',
     element: (
-      <RequireAuth>
-        {/* <Header className="mb-12" /> */}
-        <main>
-          <Outlet />
-        </main>
-        {/* <Footer /> */}
+      <RequireAuth not>
+          <RootLayout />
       </RequireAuth>
     ),
-    children: [],
+    children: [
+      {
+          path: '/dashboard',
+          element: (
+            <RequireAuth not>
+              <Dashboard />
+            </RequireAuth>
+          ),
+          default: true,
+      }
+    ],
   },
   {
     path: '/login',
